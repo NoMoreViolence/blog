@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   --text: #222;
@@ -12,16 +10,7 @@
   --inlinecode-text: #1a1a1a;
   --charcoal-grey: #36454F;
 }
-@property --dynamic-color-1 {
-  syntax: "<color>";
-  initial-value: #222;
-  inherits: false;
-}
-@property --dynamic-color-2 {
-  syntax: "<color>";
-  initial-value: #222;
-  inherits: false;
-}
+
 @media (prefers-reduced-motion) {
   * {
     transition: none !important;

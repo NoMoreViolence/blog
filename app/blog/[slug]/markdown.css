@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .markdown {
   line-height: 28px;
   --path: none;

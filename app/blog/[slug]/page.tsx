@@ -16,14 +16,15 @@ overnight.colors["editor.background"] = "var(--code-bg)";
 export default async function PostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const filename = "./public/" + params.slug + "/index.mdx";
+  const { slug } = await params;
+  const filename = "./public/" + slug + "/index.mdx";
   const file = await readFile(filename, "utf8");
   let postComponents = {};
   try {
     postComponents = await import(
-      "../../../public/" + params.slug + "/components.js"
+      "../../../public/" + slug + "/components.js"
     );
   } catch (e) {
     if (!e || e?.code !== "MODULE_NOT_FOUND") {
@@ -92,9 +93,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const file = await readFile("./public/" + params.slug + "/index.mdx", "utf8");
+  const { slug } = await params;
+  const file = await readFile("./public/" + slug + "/index.mdx", "utf8");
   let { data } = matter(file);
   return {
     title: data.title + " — Jihoon Lee",

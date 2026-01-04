@@ -26,7 +26,7 @@ export default function Link({
   href,
   target,
   ...rest
-}: JSX.IntrinsicElements["a"]) {
+}: React.JSX.IntrinsicElements["a"]) {
   const router = useRouter();
 
   if (!target && !href?.startsWith("/")) {
