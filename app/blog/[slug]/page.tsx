@@ -6,12 +6,9 @@ import Link from "@/components/Link";
 import { readdir, readFile } from "fs/promises";
 import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import overnight from "overnight/themes/Overnight-Slumber.json";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkSmartpants from "remark-smartypants";
-import { remarkMdxEvalCodeBlock } from "./mdx";
-
-overnight.colors["editor.background"] = "var(--code-bg)";
+import { Metadata } from "next";
 
 export default async function PostPage({
   params,
@@ -21,16 +18,6 @@ export default async function PostPage({
   const { slug } = await params;
   const filename = "./public/" + slug + "/index.mdx";
   const file = await readFile(filename, "utf8");
-  let postComponents = {};
-  try {
-    postComponents = await import(
-      "../../../public/" + slug + "/components.js"
-    );
-  } catch (e) {
-    if (!e || e?.code !== "MODULE_NOT_FOUND") {
-      throw e;
-    }
-  }
 
   const { content, data } = matter(file);
   const replacedContent = content
@@ -52,20 +39,16 @@ export default async function PostPage({
           source={replacedContent}
           components={{
             a: Link,
-            ...postComponents,
           }}
           options={{
             mdxOptions: {
               useDynamicImport: true,
-              remarkPlugins: [
-                remarkSmartpants,
-                [remarkMdxEvalCodeBlock, filename],
-              ],
+              remarkPlugins: [remarkSmartpants],
               rehypePlugins: [
                 [
                   rehypePrettyCode,
                   {
-                    theme: overnight,
+                    theme: "github-dark",
                   },
                 ],
               ],
@@ -94,7 +77,7 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   const file = await readFile("./public/" + slug + "/index.mdx", "utf8");
   let { data } = matter(file);

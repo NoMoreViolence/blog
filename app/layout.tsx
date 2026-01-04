@@ -1,6 +1,5 @@
 import "./globals.css";
 
-import AuthRefresh from "@/components/AuthRefresh";
 import ErrorFallback from "@/components/ErrorFallback";
 import HomeLink from "@/components/HomeLink";
 import Link from "@/components/Link";
@@ -28,50 +27,48 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthRefresh>
-      <html lang="ko" className={`${pretendard.variable}`}>
-        <body
-          className={clsx(
-            pretendard.className,
-            "mx-auto max-w-2xl px-5 py-12 text-[--text] bg-[--bg]"
-          )}
-        >
-          <header className="flex flex-row place-content-between">
-            <HomeLink />
-          </header>
+    <html lang="ko" className={`${pretendard.variable}`}>
+      <body
+        className={clsx(
+          pretendard.className,
+          "mx-auto max-w-2xl px-5 py-12 text-[--text] bg-[--bg]"
+        )}
+      >
+        <header className="flex flex-row place-content-between">
+          <HomeLink />
+        </header>
 
-          <ErrorBoundary errorComponent={ErrorFallback}>
-            <Suspense>
-              <main className="mt-14">{children}</main>
-            </Suspense>
-          </ErrorBoundary>
+        <ErrorBoundary errorComponent={ErrorFallback}>
+          <Suspense>
+            <main className="mt-14">{children}</main>
+          </Suspense>
+        </ErrorBoundary>
 
-          <footer className="mt-14">
-            <div className="flex flex-row gap-x-4">
-              <Link
-                href="mailto://ljh86029926@gmail.com"
-                className="text-[13px] underline"
-              >
-                ljh86029926@gmail.com
-              </Link>
-              <Link
-                href="https://www.linkedin.com/in/ljh000323/"
-                className="text-[13px] underline"
-                target="_blank"
-              >
-                LinkedIn
-              </Link>
-              <Link
-                href="https://github.com/NoMoreViolence"
-                className="text-[13px] underline"
-                target="_blank"
-              >
-                Github
-              </Link>
-            </div>
-          </footer>
-        </body>
-      </html>
-    </AuthRefresh>
+        <footer className="mt-14">
+          <div className="flex flex-row gap-x-4">
+            <Link
+              href="mailto://ljh86029926@gmail.com"
+              className="text-[13px] underline"
+            >
+              ljh86029926@gmail.com
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/ljh000323/"
+              className="text-[13px] underline"
+              target="_blank"
+            >
+              LinkedIn
+            </Link>
+            <Link
+              href="https://github.com/NoMoreViolence"
+              className="text-[13px] underline"
+              target="_blank"
+            >
+              Github
+            </Link>
+          </div>
+        </footer>
+      </body>
+    </html>
   );
 }

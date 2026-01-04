@@ -3,20 +3,11 @@ import Link from "@/components/Link";
 export interface Metadata {
   title: string;
   description: string;
-  alternates: {
-    types: Record<string, string>;
-  };
 }
 
 export const metadata: Metadata = {
   title: "이지훈의 블로그",
   description: "A personal blog by Jihoon LEE",
-  alternates: {
-    types: {
-      "application/atom+xml": "https://nomoreviolence.me/atom.xml",
-      "application/rss+xml": "https://nomoreviolence.me/rss.xml",
-    },
-  },
 };
 
 export default async function Home() {
