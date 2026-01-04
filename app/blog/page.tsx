@@ -21,7 +21,7 @@ export function refineTags(tags: string): string[] {
 export async function getPosts(): Promise<Post[]> {
   const entries = await readdir("./public/", { withFileTypes: true });
   const dirs = entries
-    .filter((entry) => entry.isDirectory())
+    .filter((entry) => entry.isDirectory() && entry.name !== "_fonts")
     .map((entry) => entry.name);
   const fileContents = await Promise.all(
     dirs.map((dir) => readFile("./public/" + dir + "/index.mdx", "utf8"))

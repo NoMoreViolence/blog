@@ -10,7 +10,7 @@ import localFont from "next/font/local";
 import { Suspense } from "react";
 
 const pretendard = localFont({
-  src: "../static/fonts/PretendardVariable.woff2",
+  src: "../public/_fonts/PretendardVariable.woff2",
   display: "swap",
   weight: "45 920",
   variable: "--font-pretendard",
