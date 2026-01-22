@@ -1,60 +1,88 @@
 # nomoreviolence-blog
 
-Jihoon LEE의 개인 블로그. Next.js 16 App Router 기반.
+Jihoon LEE's personal blog. Built with Next.js 16 App Router.
 
-## 기술 스택
+## Tech Stack
 
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript (strict mode)
 - **Styling**: Tailwind CSS 4
 - **Package Manager**: pnpm (10.27.0)
-- **Font**: Pretendard (로컬 폰트)
+- **Font**: Pretendard (local font)
 
-## 프로젝트 구조
+## Project Structure
 
 ```text
-app/                    # Next.js App Router 페이지
-├── layout.tsx          # 루트 레이아웃
-├── page.tsx            # 홈페이지
-├── not-found.tsx       # 404 페이지
+app/                    # Next.js App Router pages
+├── layout.tsx          # Root layout
+├── page.tsx            # Homepage
+├── not-found.tsx       # 404 page
 └── blog/
-    ├── page.tsx        # 블로그 목록
-    ├── PostList.tsx    # 포스트 리스트 컴포넌트
-    └── [slug]/         # 개별 블로그 포스트
+    ├── page.tsx        # Blog list
+    ├── PostList.tsx    # Post list component
+    └── [slug]/         # Individual blog post
         ├── page.tsx
         ├── layout.tsx
         └── PostTag.tsx
 
-components/             # 공유 컴포넌트
+components/             # Shared components
 ├── Link.tsx
 ├── HomeLink.tsx
 └── ErrorFallback.tsx
 
-public/                 # 정적 파일 및 블로그 포스트 (MDX)
-├── _fonts/             # 로컬 폰트 파일
-└── [slug]/index.mdx    # 각 블로그 포스트
+public/                 # Static files and blog posts (MDX)
+├── _fonts/             # Local font files
+└── [slug]/index.mdx    # Each blog post
 ```
 
-## 주요 명령어
+## Commands
 
 ```bash
-pnpm dev        # 개발 서버 실행
-pnpm build      # 프로덕션 빌드
-pnpm start      # 프로덕션 서버 실행
-pnpm lint       # ESLint 검사
-pnpm ts-check   # TypeScript 타입 검사
+pnpm dev        # Run development server
+pnpm build      # Production build
+pnpm start      # Run production server
+pnpm lint       # ESLint check
+pnpm ts-check   # TypeScript type check
 ```
 
-## 코드 스타일
+## Code Style
 
 - ESLint: `eslint-config-next` + `eslint-config-prettier`
-- Prettier: 세미콜론 사용, double quote, trailing comma
+- Prettier: semicolons, double quotes, trailing commas
+- Tailwind: Use theme tokens instead of arbitrary values (e.g., `text-caption` not `text-[13px]`). Add new tokens to `@theme` in `globals.css`
 
-## 블로그 포스트 작성
+## Commit Messages
 
-블로그 포스트는 `public/[slug]/index.mdx` 경로에 MDX 파일로 작성.
-frontmatter에 title, date, spoiler, tags 등 메타데이터 포함.
+- Always check previous commit format with `git log --oneline -5` before suggesting commit messages
 
-## 경로 별칭
+## Commit Separation
 
-- `@/*` → 프로젝트 루트 (`./`)
+- Separate config/documentation changes from code changes into different commits
+- Split commits by feature to make reviews easier
+- Do not commit local development config files (e.g., `__ENABLE_LOCAL_API_DEV__`), but do not `git checkout` to revert them either — the user may be in local development
+
+## Workflow
+
+- Do not run `pnpm build` or `pnpm dev` after code changes — the user will verify
+
+## Writing Blog Posts
+
+Blog posts are MDX files at `public/[slug]/index.mdx`.
+Include title, date, spoiler, tags in frontmatter.
+
+## Path Aliases
+
+- `@/*` → Project root (`./`)
+
+## Session Management
+
+Check if `.claude/sessions/.current-session` exists at conversation start.
+
+When session is active:
+
+- Automatically record progress after completing work
+- Update goal status (`[ ]` → `[~]` → `[x]`)
+- Record issues in Notes section
+- Update naturally without notifying user each time
+
+Session skills: `/session-start`, `/session-end`, `/session-current`, `/session-list`, `/session-help`
