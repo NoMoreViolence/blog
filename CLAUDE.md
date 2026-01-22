@@ -49,7 +49,12 @@ pnpm ts-check   # TypeScript type check
 
 - ESLint: `eslint-config-next` + `eslint-config-prettier`
 - Prettier: semicolons, double quotes, trailing commas
-- Tailwind: Use theme tokens instead of arbitrary values (e.g., `text-caption` not `text-[13px]`). Add new tokens to `@theme` in `globals.css`
+
+## Styling (Tailwind CSS 4)
+
+Use theme tokens defined in `@theme` block (`app/globals.css`). Do not use arbitrary values like `text-[13px]` or `bg-[--var]`.
+
+When you need a new value, add it to `@theme` first, then use the token. See `app/globals.css` for existing tokens and [Tailwind CSS v4 docs](https://tailwindcss.com/docs/theme) for token naming conventions
 
 ## Commit Messages
 
