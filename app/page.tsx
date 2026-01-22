@@ -24,7 +24,7 @@ export default async function Home() {
       <div className="flex flex-col">
         <Link
           href="/blog"
-          className="text-xl font-bold underline text-[--charcoal-grey]"
+          className="text-xl font-bold underline text-charcoal-grey"
         >
           블로그
         </Link>

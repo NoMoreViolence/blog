@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={clsx(
           pretendard.className,
-          "mx-auto max-w-2xl px-5 py-12 text-[--text] bg-[--bg]"
+          "mx-auto max-w-2xl px-5 py-12 text-text bg-bg",
         )}
       >
         <header className="flex flex-row place-content-between">
@@ -48,20 +48,20 @@ export default function RootLayout({
           <div className="flex flex-row gap-x-4">
             <Link
               href="mailto://ljh86029926@gmail.com"
-              className="text-[13px] underline"
+              className="text-caption underline"
             >
               ljh86029926@gmail.com
             </Link>
             <Link
               href="https://www.linkedin.com/in/ljh000323/"
-              className="text-[13px] underline"
+              className="text-caption underline"
               target="_blank"
             >
               LinkedIn
             </Link>
             <Link
               href="https://github.com/NoMoreViolence"
-              className="text-[13px] underline"
+              className="text-caption underline"
               target="_blank"
             >
               Github

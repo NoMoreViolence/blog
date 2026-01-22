@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
-:root {
-  --text: #222;
-  --title: #222;
-  --bg: #F5F5F5;
-  --code-bg: #232936;
-  --link: #d23669;
-  --inlinecode-bg: rgba(255, 229, 100, 0.2);
-  --inlinecode-text: #1a1a1a;
-  --charcoal-grey: #36454F;
+@theme {
+  --color-charcoal-grey: #36454f;
+  --color-text: #222;
+  --color-title: #222;
+  --color-bg: #F5F5F5;
+  --color-code-bg: #232936;
+  --color-link: #d23669;
+  --color-inlinecode-bg: rgba(255, 229, 100, 0.2);
+  --color-inlinecode-text: #1a1a1a;
+
+  --text-caption: 13px;
 }
 
 @media (prefers-reduced-motion) {

@@ -44,14 +44,14 @@ export default function PostList({ posts }: { posts: Post[] }) {
               <Link
                 style={{}}
                 key={post.slug}
-                className="block py-8 hover:scale-[1.005] border-b-[1px] border-gray-200"
+                className="block py-8 hover:scale-[1.005] border-b border-gray-200"
                 href={"/blog/" + post.slug + "/"}
               >
                 <article>
                   <h2 className="text-3xl text-charcoal-grey font-black">
                     {post.title}
                   </h2>
-                  <p className="text-[13px] text-charcoal-grey">
+                  <p className="text-caption text-charcoal-grey">
                     {new Date(post.date).toLocaleDateString("en", {
                       day: "numeric",
                       month: "long",

@@ -14,7 +14,7 @@
 }
 
 .markdown a {
-  @apply border-b-[1px] border-[--link] text-[--link];
+  @apply border-b border-link text-link;
 }
 
 .markdown hr {
@@ -34,9 +34,7 @@
 }
 
 .markdown :not(pre) > code {
-  border-radius: 10px;
-  background: var(--inlinecode-bg);
-  color: var(--inlinecode-text);
+  @apply rounded-[10px] bg-inlinecode-bg text-inlinecode-text;
   padding: 0.15em 0.2em 0.05em;
   white-space: normal;
 }

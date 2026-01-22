@@ -56,7 +56,7 @@ export default async function PostPage({
           }}
         />
       </div>
-      <div className="mt-2 text-[13px] text-charcoal-grey gap-x-2 flex">
+      <div className="mt-2 text-caption text-charcoal-grey gap-x-2 flex">
         {refineTags(data.tags).map((tag) => (
           <PostTag key={tag} tag={tag} />
         ))}
@@ -68,7 +68,7 @@ export default async function PostPage({
 export async function generateStaticParams() {
   const entries = await readdir("./public/", { withFileTypes: true });
   const dirs = entries
-    .filter((entry) => entry.isDirectory())
+    .filter((entry) => entry.isDirectory() && !entry.name.startsWith("_"))
     .map((entry) => entry.name);
   return dirs.map((dir) => ({ slug: dir }));
 }

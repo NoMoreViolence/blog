@@ -44,11 +44,7 @@ export default function Link({
           router.push(e.currentTarget.href);
         }
       }}
-      className={clsx(className, `scale-100 active:scale-100`)}
-      style={{
-        ...style,
-        transition: "transform 0.2s ease-in-out, opacity 0.2s 0.4s linear",
-      }}
+      className={className}
     >
       {children}
     </NextLink>
