@@ -14,7 +14,7 @@
 }
 
 .markdown a {
-  @apply border-b border-link text-link;
+  @apply border-b;
 }
 
 .markdown hr {
@@ -31,12 +31,6 @@
 
 .markdown h4 {
   @apply mt-2 pb-8 text-xl font-bold;
-}
-
-.markdown :not(pre) > code {
-  @apply rounded-[10px] bg-inlinecode-bg text-inlinecode-text;
-  padding: 0.15em 0.2em 0.05em;
-  white-space: normal;
 }
 
 .markdown pre {
