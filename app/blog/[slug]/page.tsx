@@ -42,7 +42,6 @@ export default async function PostPage({
           }}
           options={{
             mdxOptions: {
-              useDynamicImport: true,
               remarkPlugins: [remarkSmartpants],
               rehypePlugins: [
                 [
