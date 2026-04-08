@@ -14,11 +14,12 @@ export default async function Home() {
   return (
     <div className="flex flex-col gap-y-8">
       <div className="w-full text-md font-light text-charcoal-grey">
-        <p>소프트웨어 개발자 입니다.</p>
+        <p>소프트웨어와 게임을 만듭니다.</p>
         <p>
-          개발을 즐거워하고 개발을 통해서 세상에 가치를 주는 일을 하려고 합니다.
+          7년 반간 개발자로 일하다 나와서, 지금은 혼자 니치 소프트웨어와
+          하이퍼캐주얼 게임을 만들고 있어요.
         </p>
-        <p>취미는 러닝입니다. 꾸준히 달린지 3년정도 된 것 같아요.</p>
+        <p>취미는 러닝입니다.</p>
       </div>
 
       <div className="flex flex-col">
