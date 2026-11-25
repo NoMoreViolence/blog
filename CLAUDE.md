@@ -7,32 +7,38 @@ Jihoon LEE's personal blog. Built with Next.js 16 App Router.
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript (strict mode)
 - **Styling**: Tailwind CSS 4
-- **Package Manager**: pnpm (10.27.0)
-- **Font**: Pretendard (local font)
+- **Package Manager**: pnpm (10.34.9)
+- **Fonts**: Pretendard (reading/headings), GalmuriMono11 subset (ledger dot-print face, `scripts/subset-dot-font.sh`)
 
 ## Project Structure
 
 ```text
-app/                    # Next.js App Router pages
-├── layout.tsx          # Root layout
-├── page.tsx            # Homepage
-├── not-found.tsx       # 404 page
+app/                      # Next.js App Router pages
+├── layout.tsx            # Root layout: spine, masthead, footer
+├── globals.css           # @theme tokens (light sheet / dark cover), ledger utilities
+├── page.tsx              # Home (intro + recent ledger rows)
+├── not-found.tsx         # 404
+├── error.tsx             # Error boundary
 └── blog/
-    ├── page.tsx        # Blog list
-    ├── PostList.tsx    # Post list component
-    └── [slug]/         # Individual blog post
+    ├── page.tsx          # Ledger (post list by year)
+    ├── Ledger.tsx        # Client: tag filter + since-last-visit bookmark
+    └── [slug]/           # Individual post
         ├── page.tsx
-        ├── layout.tsx
+        ├── markdown.css  # Reading column styles
         └── PostTag.tsx
 
-components/             # Shared components
-├── Link.tsx
-├── HomeLink.tsx
-└── ErrorFallback.tsx
+components/               # Shared components
+├── Masthead.tsx, MastheadNav.tsx, Spine.tsx, SiteFooter.tsx
+├── Seal.tsx, DotNumerals.tsx, HomeLink.tsx, Link.tsx
+└── ledger/               # LedgerRow, LedgerParts (head, gap row, sheet head), Bookmark
 
-public/                 # Static files and blog posts (MDX)
-├── _fonts/             # Local font files
-└── [slug]/index.mdx    # Each blog post
+lib/
+├── posts.ts              # Post loading + ledger data (numbering, char counts, gaps)
+└── format.ts             # Ledger number/date formatting
+
+public/                   # Static files and blog posts (MDX)
+├── _fonts/               # Local font files (+ OFL license for Galmuri)
+└── [slug]/index.mdx      # Each blog post (folders without index.mdx are ignored)
 ```
 
 ## Commands
