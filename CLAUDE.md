@@ -5,7 +5,7 @@ Jihoon LEE's personal blog. Built with Next.js 16 App Router.
 ## Tech Stack
 
 - **Framework**: Next.js 16 (App Router)
-- **Language**: TypeScript (strict mode)
+- **Language**: TypeScript 7 (strict mode)
 - **Styling**: Tailwind CSS 4
 - **Package Manager**: pnpm (10.34.9)
 - **Fonts**: Pretendard (reading/headings), GalmuriMono11 subset (ledger dot-print face, `scripts/subset-dot-font.sh`)
@@ -47,13 +47,13 @@ public/                   # Static files and blog posts (MDX)
 pnpm dev        # Run development server
 pnpm build      # Production build
 pnpm start      # Run production server
-pnpm lint       # ESLint check
+pnpm lint       # oxlint check
 pnpm ts-check   # TypeScript type check
 ```
 
 ## Code Style
 
-- ESLint: `eslint-config-next` + `eslint-config-prettier`
+- Lint: oxlint (`.oxlintrc.json`) — correctness + react/hooks, nextjs, jsx-a11y, import 플러그인. ESLint는 쓰지 않는다 (typescript-eslint가 TS 7 미지원)
 - Prettier: semicolons, double quotes, trailing commas
 
 ## Styling (Tailwind CSS 4)

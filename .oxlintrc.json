@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  // eslint-config-next(core-web-vitals)이 맡던 영역을 oxlint 네이티브 플러그인으로 옮긴 것.
+  // `plugins`를 적으면 기본 목록(eslint·typescript·unicorn·oxc)이 대체되므로 함께 적는다.
+  "plugins": [
+    "eslint",
+    "typescript",
+    "unicorn",
+    "oxc",
+    "react",
+    "nextjs",
+    "jsx-a11y",
+    "import"
+  ],
+  "categories": {
+    "correctness": "error"
+  },
+  "rules": {
+    // react-hooks 권장 세트(eslint-plugin-react-hooks 7, React Compiler 규칙 포함)와 같은 수준. kil과 동일.
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "error",
+    "react/set-state-in-effect": "error",
+    "react/immutability": "error",
+    "react/purity": "error",
+    "react/jsx-key": "error",
+    // 빈 catch {} 금지 — 의도한 무시는 주석으로 이유를 남긴다.
+    "no-empty": "error"
+  },
+  "ignorePatterns": [".next/**", "next-env.d.ts"]
+}
