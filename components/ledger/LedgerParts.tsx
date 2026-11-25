@@ -13,7 +13,7 @@ export function LedgerHead() {
       <span className="area-body">적요</span>
       <span className="area-tags">태그</span>
       <span className="area-chars text-right">글자</span>
-      <span className="area-cum text-right">누적</span>
+      <span className="area-cum text-right">누적 글자</span>
     </div>
   );
 }

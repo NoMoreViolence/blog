@@ -46,6 +46,7 @@ function RunningHead({ entry }: { entry: LedgerEntry }) {
         <span className="area-cum text-right text-ink-blue">
           <span className="md:sr-only">누적 </span>
           {ledgerCount(entry.cumulative)}
+          <span className="md:sr-only">자</span>
         </span>
       </div>
     </div>

@@ -66,6 +66,7 @@ export default function LedgerRow({
         <span className="area-cum text-right font-ledger text-xs text-ink-blue">
           <span className="md:sr-only">누적 </span>
           {ledgerCount(entry.cumulative)}
+          <span className="md:sr-only">자</span>
         </span>
       </NextLink>
     </li>
