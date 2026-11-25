@@ -1,9 +1,12 @@
-import Link from "next/link";
+import NextLink from "next/link";
 
 export default function PostTag({ tag }: { tag: string }) {
   return (
-    <Link className="underline cursor-pointer" href={`/blog/?tag=${tag}`}>
-      <span>#{tag}</span>
-    </Link>
+    <NextLink
+      href={`/blog?tag=${encodeURIComponent(tag)}`}
+      className="text-ink-soft underline decoration-rule underline-offset-4 transition-colors duration-150 hover:text-ink hover:decoration-ink"
+    >
+      #{tag}
+    </NextLink>
   );
 }

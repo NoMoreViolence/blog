@@ -1,13 +1,14 @@
 import clsx from "clsx";
 import Link from "./Link";
 
-export default function HomeLink() {
+/** The NoMoreViolence wordmark, always a way back to the first sheet. */
+export default function HomeLink({ className }: { className?: string }) {
   return (
     <Link
       href="/"
       className={clsx(
-        "inline-block text-2xl font-black text-charcoal-grey",
-        "transition-all duration-100 ease-in-out scale-100 hover:scale-105 active:scale-95",
+        "font-black tracking-tight text-ink transition-opacity duration-150 hover:opacity-70 active:opacity-50",
+        className,
       )}
     >
       NoMoreViolence

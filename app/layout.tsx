@@ -1,9 +1,10 @@
 import "./globals.css";
 
-import HomeLink from "@/components/HomeLink";
-import Link from "@/components/Link";
-import clsx from "clsx";
-import type { Metadata } from "next";
+import Masthead from "@/components/Masthead";
+import SiteFooter from "@/components/SiteFooter";
+import Spine from "@/components/Spine";
+import { getLedger } from "@/lib/posts";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Suspense } from "react";
 
@@ -14,56 +15,54 @@ const pretendard = localFont({
   variable: "--font-pretendard",
 });
 
+/* Dot-matrix printer face; subset, see scripts/subset-dot-font.sh. */
+const galmuri = localFont({
+  src: "../public/_fonts/GalmuriMono11-ledger.woff2",
+  display: "swap",
+  weight: "400",
+  variable: "--font-galmuri",
+});
+
 export const metadata: Metadata = {
   title: "nomoreviolence — A blog by Jihoon LEE",
   description: "A personal blog by Jihoon LEE",
 };
 
-export default function RootLayout({
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#e4ece7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d271f" },
+  ],
+};
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { entries } = await getLedger();
+  const first = entries.at(0);
+  const last = entries.at(-1);
+
   return (
-    <html lang="ko" className={`${pretendard.variable}`}>
-      <body
-        className={clsx(
-          pretendard.className,
-          "mx-auto max-w-2xl px-5 py-12 text-text bg-bg",
-        )}
-      >
-        <header className="flex flex-row place-content-between">
-          <HomeLink />
-        </header>
-
-        <Suspense>
-          <main className="mt-14">{children}</main>
-        </Suspense>
-
-        <footer className="mt-14">
-          <div className="flex flex-row gap-x-4">
-            <Link
-              href="mailto://ljh86029926@gmail.com"
-              className="text-caption underline"
-            >
-              ljh86029926@gmail.com
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/ljh000323/"
-              className="text-caption underline"
-              target="_blank"
-            >
-              LinkedIn
-            </Link>
-            <Link
-              href="https://github.com/NoMoreViolence"
-              className="text-caption underline"
-              target="_blank"
-            >
-              Github
-            </Link>
+    <html lang="ko" className={`${pretendard.variable} ${galmuri.variable}`}>
+      <body className="font-sans antialiased">
+        <div className="min-h-dvh spine-grid">
+          <Spine since={first?.year ?? new Date().getFullYear()} />
+          <div className="flex min-h-dvh min-w-0 flex-col">
+            <div className="bg-guilloche">
+              <div className="mx-auto w-full max-w-5xl px-5 pt-6 sm:px-10 sm:pt-8 lg:px-16 lg:pt-12">
+                <Masthead openedIso={first?.iso} />
+              </div>
+            </div>
+            <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-5 sm:px-10 lg:px-16">
+              <Suspense>
+                <main className="flex-1">{children}</main>
+              </Suspense>
+              <SiteFooter firstYear={first?.year} lastYear={last?.year} />
+            </div>
           </div>
-        </footer>
+        </div>
       </body>
     </html>
   );

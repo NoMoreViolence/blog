@@ -1,52 +1,34 @@
-"use client";
+import NextLink from "next/link";
 
-import clsx from "clsx";
-import NextLink, { LinkProps } from "next/link";
-import { useRouter } from "next/navigation";
-
-function isModifiedEvent(
-  event: Parameters<NonNullable<LinkProps["onClick"]>>[0]
-) {
-  const eventTarget = event.currentTarget;
-  const target = eventTarget.getAttribute("target");
-  return (
-    (target && target !== "_self") ||
-    event.metaKey ||
-    event.ctrlKey ||
-    event.shiftKey ||
-    event.altKey ||
-    (event.nativeEvent && event.nativeEvent.which === 2)
-  );
-}
-
+/**
+ * Internal paths go through next/link; anything with a scheme opens in a new
+ * tab, except mailto/tel which hand off to the OS.
+ */
 export default function Link({
-  className,
+  href = "",
   children,
-  style,
-  href,
-  target,
   ...rest
-}: React.JSX.IntrinsicElements["a"]) {
-  const router = useRouter();
-
-  if (!target && !href?.startsWith("/")) {
-    target = "_blank";
+}: React.ComponentProps<"a">) {
+  if (href.startsWith("/") || href.startsWith("?")) {
+    return (
+      <NextLink href={href} {...rest}>
+        {children}
+      </NextLink>
+    );
   }
 
+  const handsOff = href.startsWith("mailto:") || href.startsWith("tel:");
+  const isAnchor = href.startsWith("#");
+
   return (
-    <NextLink
+    <a
+      href={href}
+      {...(handsOff || isAnchor
+        ? {}
+        : { target: "_blank", rel: "noopener noreferrer" })}
       {...rest}
-      target={target}
-      href={href ?? ""}
-      onClick={(e) => {
-        if (!isModifiedEvent(e)) {
-          e.preventDefault();
-          router.push(e.currentTarget.href);
-        }
-      }}
-      className={className}
     >
       {children}
-    </NextLink>
+    </a>
   );
 }
