@@ -41,3 +41,5 @@ next-env.d.ts
 # claude.ai
 .claude/docs
 .claude/sessions
+# unpublished drafts (public repo — keep local)
+/drafts
