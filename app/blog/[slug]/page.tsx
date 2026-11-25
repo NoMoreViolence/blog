@@ -1,14 +1,12 @@
 import "./markdown.css";
 
 import PostTag from "@/app/blog/[slug]/PostTag";
-import { refineTags } from "@/app/blog/page";
 import Link from "@/components/Link";
-import { readdir, readFile } from "fs/promises";
-import matter from "gray-matter";
+import { getPostSlugs, getPostSource } from "@/lib/posts";
+import { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkSmartpants from "remark-smartypants";
-import { Metadata } from "next";
 
 export default async function PostPage({
   params,
@@ -16,19 +14,16 @@ export default async function PostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const filename = "./public/" + slug + "/index.mdx";
-  const file = await readFile(filename, "utf8");
-
-  const { content, data } = matter(file);
+  const { post, content } = await getPostSource(slug);
   const replacedContent = content
     .replaceAll("\b", "")
     .replaceAll(String.fromCharCode(29), "");
 
   return (
     <article>
-      <h1 className="text-4xl font-black text-charcoal-grey">{data.title}</h1>
+      <h1 className="text-4xl font-black text-charcoal-grey">{post.title}</h1>
       <p className="mt-2 text-md text-charcoal-grey">
-        {new Date(data.date).toLocaleDateString("en", {
+        {post.date.toLocaleDateString("en", {
           day: "numeric",
           month: "long",
           year: "numeric",
@@ -56,7 +51,7 @@ export default async function PostPage({
         />
       </div>
       <div className="mt-2 text-caption text-charcoal-grey gap-x-2 flex">
-        {refineTags(data.tags).map((tag) => (
+        {post.tags.map((tag) => (
           <PostTag key={tag} tag={tag} />
         ))}
       </div>
@@ -65,11 +60,8 @@ export default async function PostPage({
 }
 
 export async function generateStaticParams() {
-  const entries = await readdir("./public/", { withFileTypes: true });
-  const dirs = entries
-    .filter((entry) => entry.isDirectory() && !entry.name.startsWith("_"))
-    .map((entry) => entry.name);
-  return dirs.map((dir) => ({ slug: dir }));
+  const slugs = await getPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -78,11 +70,10 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const file = await readFile("./public/" + slug + "/index.mdx", "utf8");
-  let { data } = matter(file);
+  const { post } = await getPostSource(slug);
   return {
-    title: data.title + " — Jihoon Lee",
-    description: data.spoiler,
+    title: post.title + " — Jihoon Lee",
+    description: post.spoiler,
     alternates: { types: {} },
   };
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "@/app/blog/page";
+import type { Post } from "@/lib/posts";
 import Link from "@/components/Link";
 import { groupBy, map, mapValues } from "lodash-es";
 import { useRouter, useSearchParams } from "next/navigation";

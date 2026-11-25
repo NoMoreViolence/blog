@@ -1,11 +1,9 @@
 import "./globals.css";
 
-import ErrorFallback from "@/components/ErrorFallback";
 import HomeLink from "@/components/HomeLink";
 import Link from "@/components/Link";
 import clsx from "clsx";
 import type { Metadata } from "next";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import localFont from "next/font/local";
 import { Suspense } from "react";
 
@@ -38,11 +36,9 @@ export default function RootLayout({
           <HomeLink />
         </header>
 
-        <ErrorBoundary errorComponent={ErrorFallback}>
-          <Suspense>
-            <main className="mt-14">{children}</main>
-          </Suspense>
-        </ErrorBoundary>
+        <Suspense>
+          <main className="mt-14">{children}</main>
+        </Suspense>
 
         <footer className="mt-14">
           <div className="flex flex-row gap-x-4">
